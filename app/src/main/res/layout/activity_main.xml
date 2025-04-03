@@ -5,23 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+
     android:padding="16dp"
     tools:context=".MainActivity">
 
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="0dp">
+
+
+        <LinearLayout
+            android:id="@+id/currencyContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </ScrollView>
+
+
+
     <TextView
-        android:id="@+id/act1_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Добро пожаловать!"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+            android:id="@+id/act1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Загрузка"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/reloadButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Начать" />
 
+        android:text="Обновить" />
+    <Button
+        android:id="@+id/secondActivityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+
+        android:text="График курса" />
+
+    <Button
+        android:id="@+id/thirdActivityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+
+        android:text="Третья страница" />
 </LinearLayout>
