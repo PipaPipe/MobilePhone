@@ -2,30 +2,18 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.*
 import android.view.LayoutInflater
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.myapplication.ui.theme.MyApplicationTheme
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.ComponentActivity
 import com.google.gson.Gson
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
-import android.util.Log
-import android.util.*
 import java.util.Locale
 import kotlin.concurrent.thread
-
 
 
 //import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +24,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         Log.d("TAG", "НАчали1")
         val reloadButton = findViewById<Button>(R.id.reloadButton)
         val graphics = findViewById<Button>(R.id.secondActivityButton)
@@ -45,20 +35,21 @@ class MainActivity : ComponentActivity() {
 
         thread {
             try {
-                Log.d("TAG", "НАчали3")
                 val resp = sendRequest()
-                Log.d("TAG", resp)
-                vtext.text = "асд"
-                runOnUiThread {
+
+
+                runOnUiThread() {
                     val jsonString = resp  // Ваш JSON
                     val cbrResponse = Gson().fromJson(jsonString, CbrResponse::class.java)
 
                     val currencyList = cbrResponse.Valute.values.toList()
 
                     vtext.text = "Актуально: \n${formatDateToRussian(cbrResponse.Date)}"
+
                     showCurrencies(currencyList)
                 }
             } catch (e: Exception) {
+                Log.e("TAG", e.message.toString())
                 runOnUiThread {
                     vtext.text = "Ошибка: ${e.message}"
                 }
@@ -74,6 +65,7 @@ class MainActivity : ComponentActivity() {
         graphics.setOnClickListener {
             val i = Intent(this, SecondActivity::class.java)
             startActivity(i)
+
         }
 
         third.setOnClickListener {
@@ -94,14 +86,26 @@ class MainActivity : ComponentActivity() {
                 .inflate(R.layout.currency_item, container, false)
 
             itemView.findViewById<TextView>(R.id.tvCharCode).text = "${currency.CharCode}"
-
             itemView.findViewById<TextView>(R.id.tvNominal).text = "${currency.Nominal}"
-
             itemView.findViewById<TextView>(R.id.tvName).text = "${currency.Name}"
-
             itemView.findViewById<TextView>(R.id.tvValue).text = "${currency.Value}"
-
             itemView.findViewById<TextView>(R.id.tvPrevious).text = "${currency.Previous}"
+
+
+            itemView.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putString("ID", currency.ID)
+                    putString("CharCode", currency.CharCode)
+                    putInt("Nominal", currency.Nominal)
+                    putString("Name", currency.Name)
+                    putDouble("Value", currency.Value)
+                    putDouble("Previous", currency.Previous)
+                }
+
+                val intent = Intent(this, SecondActivity::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
 
             container.addView(itemView)
         }
@@ -110,8 +114,8 @@ class MainActivity : ComponentActivity() {
 
 
 fun sendRequest(): String {
-    val url = URL("https://example.com")
-//    val url = URL("https://www.cbr-xml-daily.ru/daily_json.js")
+//    val url = URL("https://example.com")
+    val url = URL("https://www.cbr-xml-daily.ru/daily_json.js")
     val connection = url.openConnection() as HttpURLConnection
     return try {
         connection.apply {
