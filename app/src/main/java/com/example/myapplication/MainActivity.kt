@@ -15,31 +15,21 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.concurrent.thread
 
-
-//import androidx.appcompat.app.AppCompatActivity
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("TAG", "НАчали")
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-        Log.d("TAG", "НАчали1")
         val reloadButton = findViewById<Button>(R.id.reloadButton)
-        val graphics = findViewById<Button>(R.id.secondActivityButton)
         val third = findViewById<Button>(R.id.thirdActivityButton)
         val vtext = findViewById<TextView>(R.id.act1_text)
-        Log.d("TAG", "НАчали2")
 
         thread {
             try {
                 val resp = sendRequest()
-
-
                 runOnUiThread() {
-                    val jsonString = resp  // Ваш JSON
+                    val jsonString = resp
                     val cbrResponse = Gson().fromJson(jsonString, CbrResponse::class.java)
 
                     val currencyList = cbrResponse.Valute.values.toList()
@@ -55,23 +45,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-//        startButton.setOnClickListener {
-////            vtext.text = "Загрузка..."
-//            // Действие при нажатии на кнопку
-//
-////            val i = Intent(this, SecondActivity::class.java)
-////            startActivity(i)
-//        }
-        graphics.setOnClickListener {
-            val i = Intent(this, SecondActivity::class.java)
-            startActivity(i)
-
-        }
 
         third.setOnClickListener {
-//            vtext.text = "Загрузка..."
-            // Действие при нажатии на кнопку
-
             val i = Intent(this, ThirdActivity::class.java)
             startActivity(i)
         }
@@ -114,7 +89,6 @@ class MainActivity : ComponentActivity() {
 
 
 fun sendRequest(): String {
-//    val url = URL("https://example.com")
     val url = URL("https://www.cbr-xml-daily.ru/daily_json.js")
     val connection = url.openConnection() as HttpURLConnection
     return try {
@@ -136,23 +110,13 @@ fun sendRequest(): String {
     }
 }
 
-//fun sendRequest2(): String {
-//    val connection = URL("https://www.cbr-xml-daily.ru/daily_json.js").openConnection() as HttpURLConnection
-//    connection.connectTimeout = 5000
-//    connection.readTimeout = 5000
-//
-//    return connection.inputStream.bufferedReader().use { it.readText() }
-//}
-
-
-
 fun formatDateToRussian(isoDate: String): String {
     val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.getDefault())
     val date = parser.parse(isoDate) // 2025-04-01T11:30:00+03:00 → Date
 
 
     val formatter = SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale("ru"))
-    return formatter.format(date) // 01 апреля 2025
+    return formatter.format(date)
 }
 
 

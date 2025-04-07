@@ -40,7 +40,7 @@ class SecondActivity : ComponentActivity() {
         val nameText = findViewById<TextView>(R.id.detailName)
         val valueText = findViewById<TextView>(R.id.detailValue)
         val previousText = findViewById<TextView>(R.id.detailPrevious)
-//        val testXML = findViewById<TextView>(R.id.testXML)
+
         val ID = bundle?.get("ID")
         Log.d("TAG", ID.toString())
 

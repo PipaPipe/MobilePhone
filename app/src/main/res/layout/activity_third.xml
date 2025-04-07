@@ -9,6 +9,12 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/horse"
+        android:scaleType="centerCrop"/>
+
     <TextView
         android:id="@+id/act2_text"
         android:layout_width="wrap_content"
