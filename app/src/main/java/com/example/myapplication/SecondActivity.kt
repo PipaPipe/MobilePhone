@@ -58,7 +58,6 @@ class SecondActivity : ComponentActivity() {
                     Log.d("TAG", resp)
                     val (dates, floatValues) = parseCurrencyData(resp)
                     runOnUiThread {
-//                        testXML.text = resp
                         setupChart(chart, dates, floatValues, "Динамика значений")
                     }
                 } catch (e: Exception) {
@@ -118,18 +117,6 @@ class SecondActivity : ComponentActivity() {
             previousText.text = "Предыдущий курс: ${it.getDouble("Previous", 0.0)}"
 
         }
-
-//        thread {
-//            try {
-//                val resp = sendRequestGraphics(ID.toString(), format)
-//                Log.d("TAG", resp)
-//            } catch (e: Exception) {
-//                Log.e("TAG", e.message.toString())
-//
-//            }
-//        }
-
-
     }
 }
 
@@ -215,12 +202,7 @@ fun parseCurrencyData(xmlData: String): Pair<List<String>, List<Float>> {
 }
 
 
-fun setupChart(
-    chart: LineChart,
-    dates: List<String>,
-    values: List<Float>,
-    label: String
-) {
+fun setupChart(chart: LineChart, dates: List<String>, values: List<Float>, label: String) {
     // 1. Подготовка данных
     val entries = values.mapIndexed { index, value ->
         Entry(index.toFloat(), value)

@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp"
-    tools:context=".MainActivity">
+    android:padding="24dp">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:src="@drawable/horse"
-        android:scaleType="centerCrop"/>
-
-    <TextView
-        android:id="@+id/act2_text"
+    <Switch
+        android:id="@+id/alarmToggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Третья активность"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:text="Уведомления о курсе валют"
+        android:textSize="18sp"/>
+
 
     <Button
         android:id="@+id/backButton"
@@ -31,3 +22,35 @@
         android:text="Вернуться назад" />
 
 </LinearLayout>
+
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout-->
+    <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:orientation="vertical"-->
+    <!--    android:gravity="center"-->
+    <!--    android:padding="16dp"-->
+    <!--    tools:context=".MainActivity">-->
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="400dp"-->
+    <!--        android:src="@drawable/horse"-->
+    <!--        android:scaleType="centerCrop"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/act2_text"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Третья активность"-->
+    <!--        android:textSize="24sp"-->
+    <!--        android:textStyle="bold" />-->
+
+
+    <!--</LinearLayout>-->
