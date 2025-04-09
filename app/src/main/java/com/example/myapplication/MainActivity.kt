@@ -31,17 +31,36 @@ class MainActivity : ComponentActivity() {
                 runOnUiThread() {
                     val jsonString = resp
                     val cbrResponse = Gson().fromJson(jsonString, CbrResponse::class.java)
-
                     val currencyList = cbrResponse.Valute.values.toList()
-
                     vtext.text = "Актуально: \n${formatDateToRussian(cbrResponse.Date)}"
-
                     showCurrencies(currencyList)
                 }
             } catch (e: Exception) {
                 Log.e("TAG", e.message.toString())
                 runOnUiThread {
                     vtext.text = "Ошибка: ${e.message}"
+                }
+            }
+        }
+
+        reloadButton.setOnClickListener {
+            thread {
+                try {
+                    Log.d("TAG", "asd")
+                    val resp = sendRequest()
+                    runOnUiThread() {
+                        vtext.text = "Загрузка..."
+                        val jsonString = resp
+                        val cbrResponse = Gson().fromJson(jsonString, CbrResponse::class.java)
+                        val currencyList = cbrResponse.Valute.values.toList()
+                        vtext.text = "Актуально: \n${formatDateToRussian(cbrResponse.Date)}"
+                        showCurrencies(currencyList)
+                    }
+                } catch (e: Exception) {
+                    Log.e("TAG", e.message.toString())
+                    runOnUiThread {
+                        vtext.text = "Ошибка: ${e.message}"
+                    }
                 }
             }
         }

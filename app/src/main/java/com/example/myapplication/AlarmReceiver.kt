@@ -19,14 +19,9 @@ class AlarmReceiver : BroadcastReceiver() {
 }
 
 fun showNotification(context: Context, title: String, message: String) {
-
-//    Log.d("AlarmReceiver", Build.VERSION.RELEASE.toString())
-
     var notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
-    // Создаем канал для Android 8.0+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        Log.d("TAG", "Alarm received!")
         var channel = NotificationChannel(
             "currency_channel",
             "Курс валют",
@@ -42,6 +37,5 @@ fun showNotification(context: Context, title: String, message: String) {
         .setPriority(NotificationCompat.PRIORITY_MAX)
         .setDefaults(Notification.DEFAULT_SOUND and Notification.DEFAULT_VIBRATE)
         .build()
-    Log.d("TAG", "Alarm received!")
     notificationManager.notify(42, notification)
 }

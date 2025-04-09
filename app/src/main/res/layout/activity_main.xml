@@ -30,7 +30,7 @@
             android:id="@+id/act1_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Загрузка"
+            android:text="Загрузка..."
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -39,7 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-
         android:text="Обновить" />
 
     <Button
@@ -47,6 +46,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-
-        android:text="Третья страница" />
+        android:text="Настройка уведомлений" />
 </LinearLayout>
